@@ -1,3 +1,5 @@
+package org.example;
+
 import com.google.gson.Gson;
 import org.apache.hc.client5.http.classic.methods.*;
 import org.apache.hc.client5.http.impl.classic.BasicHttpClientResponseHandler;
