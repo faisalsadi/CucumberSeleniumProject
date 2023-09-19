@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.util.HashMap;
 
+
+
 public class FirstTest {
 //    private static String apiUrl = "https://us-central1-testomate-test.cloudfunctions.net/api";
     @Test
@@ -21,10 +23,8 @@ public class FirstTest {
     "id_delivery_times": null
 }
          */
-        map.put("username","fesalsadi@gmail.co");
+        map.put("username","fesalsadi@gmail.com");
         map.put("password","123456789");
-        map.put("restore_account",false);
-        map.put("id_delivery_times",null);
 
         LoginResponse post = HttpFacade.post("https://api-prod.rami-levy.co.il/api/v2/site/auth/login", map, LoginResponse.class);
         assertTrue(true);

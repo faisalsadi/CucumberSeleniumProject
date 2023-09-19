@@ -1,4 +1,13 @@
 package org.example;
 
+
+/*
+
+EcomToken:
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLXByb2QucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6XC9cL2FwaS1wcm9kLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTY5NDcwNzQyOSwibmJmIjoxNjk0NzA3NDg5LCJleHAiOjE2OTQ3OTM4MjksImlkIjo4ODk0MDQsImVtYWlsIjoiZmVzYWxzYWRpQGdtYWlsLmNvbSIsImNpZCI6Ijk5MDAxNTQ3NjI4In0.3BeOGC3omqqV3gkzPzmnDKtRX1E3RpR47cs6pqdWGvQ
+ */
+//
+// https://www.rami-levy.co.il/api/v2/cart
 public class Api {
 }

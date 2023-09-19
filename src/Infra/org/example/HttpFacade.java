@@ -1,5 +1,5 @@
 package org.example;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.apache.hc.client5.http.classic.methods.*;
 import org.apache.hc.client5.http.impl.classic.BasicHttpClientResponseHandler;
@@ -58,10 +58,9 @@ public class HttpFacade {
             throw  new RuntimeException("not valid login details");
         }
 //        String response = httpClient.execute(request, new BasicHttpClientResponseHandler());
+        ObjectMapper responseMapper = new ObjectMapper();
 
-
-        T object = gson.fromJson(responseString, clz);
-        return object;
+        return gson.fromJson(responseString, clz);
     }
 
     public static <T> T put(String url, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
@@ -78,6 +77,7 @@ public class HttpFacade {
         request.setHeader("Content-Type", "application/json");
 
         String response = httpClient.execute(request, new BasicHttpClientResponseHandler());
+
 
         T object = gson.fromJson(response, clz);
         return object;
