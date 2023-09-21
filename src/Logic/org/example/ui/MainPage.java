@@ -1,5 +1,6 @@
-package org.example;
+package org.example.ui;
 
+import org.example.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-public class MainPage extends Page{
+public class MainPage extends Page {
     private static String loginButtonLocatorID = "login-user";
     private static String itemsLocatorID = "//div[@class='swiper-wrapper']";
     private static String itemLocatorID = "//div[@class='swiper-slide']";
@@ -17,6 +18,7 @@ public class MainPage extends Page{
     private static String logutButtonXpathLocator = "//div[@class='d-flex p-2 mt-5']";
     private static String emptyCartButtonIdLocator="remove-cart";
     private static String searchItemIdLocator = "destination";
+    private static String userName="faisal";
     private WebElement loginButton;
     private List<WebElement> items;
     private WebElement item;
@@ -86,5 +88,10 @@ public class MainPage extends Page{
     {
         emptyCart=driver.findElement(By.id(emptyCartButtonIdLocator));
         emptyCart.click();
+    }
+    public String getNameTag()
+    {
+        loginButton=driver.findElement(By.id(loginButtonLocatorID));
+        return loginButton.getText();
     }
 }

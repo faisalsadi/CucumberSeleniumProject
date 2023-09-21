@@ -10,4 +10,5 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLXByb2QucmFtaS1
 //
 // https://www.rami-levy.co.il/api/v2/cart
 public class Api {
+
 }
