@@ -20,11 +20,17 @@
 Feature: Login Feature
 #  Background:
 #    Given I’m on the Rami-Levy site
-  Scenario: Login
+  Scenario: Login Success
     Given I have navigated to Rami Levi
     And On Rami Levi home page - I click login
     When On login popup - I login with user 'fesalsadi@gmail.com' and password '123456789'
     Then On Rami Levi home page - 'faisal'
+
+  Scenario: Failed Login
+    Given I have navigated to Rami Levi
+    And On Rami Levi home page - I click login
+    When On login popup - I login with user 'fesalsadi@gmail.com' and password '123'
+    Then I am still at login popup
 
 
 

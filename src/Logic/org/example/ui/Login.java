@@ -41,4 +41,8 @@ public class Login extends Page {
         loginButton.click();
 
     }
+
+    public String getNameTag() {
+        return driver.findElement(By.xpath("//div[contains(text(),\"כניסה\")]")).getText();
+    }
 }
