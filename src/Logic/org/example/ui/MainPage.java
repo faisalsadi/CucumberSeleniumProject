@@ -20,8 +20,7 @@ public class MainPage extends Page {
     private static String searchItemIdLocator = "destination";
     private static String userName="faisal";
     private WebElement loginButton;
-    private List<WebElement> items;
-    private WebElement item;
+
     private  WebElement profileButton;
     private WebElement logout;
     private WebElement emptyCart;
@@ -33,8 +32,6 @@ public class MainPage extends Page {
 
     private void init() {
         loginButton= driver.findElement(By.id(loginButtonLocatorID));
-        items = driver.findElements(By.xpath(itemsLocatorID));
-        item = driver.findElement(By.xpath(itemLocatorID));
         search=driver.findElement(By.id(searchItemIdLocator));
     }
 
@@ -47,12 +44,15 @@ public class MainPage extends Page {
     {
         loginButton.click();
     }
-    public void addItemToCart(int row , int col) throws InterruptedException {
+    public void addItemToCart(String name) throws InterruptedException {
 
-        WebElement rowelement = items.get(row);
-        List<WebElement> cols = rowelement.findElements(By.xpath("./*"));
+//        WebElement rowelement = items.get(row);
+//        List<WebElement> cols = rowelement.findElements(By.xpath("./*"));
 
-        WebElement elem=cols.get(col-1);
+        // //button[@aria-label='הוסף 1 יחידות לשוקו טרה בבקבוק לסל הקניות']
+
+//
+        WebElement elem=driver.findElement(By.xpath("//h3[contains(text(),"+"\""+ name +"\")]"));
 
         //Creating object of an Actions class
         Actions action = new Actions(driver);
@@ -61,7 +61,7 @@ public class MainPage extends Page {
         action.moveToElement(elem).perform();
         Thread.sleep(3000);
 
-        WebElement button = elem.findElement(By.tagName("button"));
+        WebElement button = elem.findElement(By.xpath("//button[@aria-label='הוסף 1 יחידות ל"+name+" לסל הקניות']"));
 
         button.click();
 //        driver.navigate().refresh();
@@ -93,5 +93,15 @@ public class MainPage extends Page {
     {
         loginButton=driver.findElement(By.id(loginButtonLocatorID));
         return loginButton.getText();
+    }
+    public boolean isItemInCart(String name)
+    {
+        try {
+            driver.findElement(By.xpath("//div[contains(text(),"+"\""+name+"\")]"));
+            return true;
+        }catch (RuntimeException e)
+        {
+            return false;
+        }
     }
 }
