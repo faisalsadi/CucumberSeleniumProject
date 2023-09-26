@@ -1,125 +1,189 @@
 package org.example;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+@Data
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "token",
+        "user_id",
+        "meta",
+        "store_id",
+        "locale",
+        "identity_card",
+        "accounting_card_id",
+        "business",
+        "birth_date",
+        "phone",
+        "additional_phone",
+        "sex_id",
+        "edit_order",
+        "send_email",
+        "send_sms",
+        "subscribe_at",
+        "subscribe_ip",
+        "club_accept_at",
+        "club_accept_ip",
+        "club_accept",
+        "send_club_database",
+        "disabled_at",
+        "activated_at",
+        "deleted_at",
+        "area_id",
+        "deactivated_at",
+        "customer_id_club",
+        "name",
+        "orders",
+        "cards",
+        "addresses",
+        "popularProducts",
+        "features",
+        "coupons"
+})
 
 public class User {
 
-    @SerializedName("id")
-    @Expose
+//    @Override
+//    public String toString() {
+//        return "{" +
+//                "\"id\"=" + id +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", email='" + email + '\'' +
+//                ", token='" + token + '\'' +
+//                ", userId='" + userId + '\'' +
+//                ", meta=" + meta +
+//                ", storeId='" + storeId + '\'' +
+//                ", locale=" + locale +
+//                ", identityCard='" + identityCard + '\'' +
+//                ", accountingCardId=" + accountingCardId +
+//                ", business=" + business +
+//                ", birthDate=" + birthDate +
+//                ", phone=" + phone +
+//                ", additionalPhone=" + additionalPhone +
+//                ", sexId=" + sexId +
+//                ", editOrder=" + editOrder +
+//                ", sendEmail=" + sendEmail +
+//                ", sendSms=" + sendSms +
+//                ", subscribeAt='" + subscribeAt + '\'' +
+//                ", subscribeIp='" + subscribeIp + '\'' +
+//                ", clubAcceptAt='" + clubAcceptAt + '\'' +
+//                ", clubAcceptIp='" + clubAcceptIp + '\'' +
+//                ", clubAccept=" + clubAccept +
+//                ", sendClubDatabase=" + sendClubDatabase +
+//                ", disabledAt=" + disabledAt +
+//                ", activatedAt=" + activatedAt +
+//                ", deletedAt=" + deletedAt +
+//                ", areaId=" + areaId +
+//                ", deactivatedAt=" + deactivatedAt +
+//                ", customerIdClub=" + customerIdClub +
+//                ", name='" + name + '\'' +
+//                ", orders=" + orders +
+//                ", cards=" + cards +
+//                ", addresses=" + addresses +
+//                ", popularProducts='" + popularProducts + '\'' +
+//                ", features=" + features +
+//                ", coupons=" + coupons +
+//                ", additionalProperties=" + additionalProperties +
+//                '}';
+//    }
+
+    @JsonProperty("id")
     public Integer id;
-    @SerializedName("first_name")
-    @Expose
+    @JsonProperty("first_name")
     public String firstName;
-    @SerializedName("last_name")
-    @Expose
+    @JsonProperty("last_name")
     public String lastName;
-    @SerializedName("email")
-    @Expose
+    @JsonProperty("email")
     public String email;
-    @SerializedName("token")
-    @Expose
+    @JsonProperty("token")
     public String token;
-    @SerializedName("user_id")
-    @Expose
+    @JsonProperty("user_id")
     public String userId;
-    @SerializedName("meta")
-    @Expose
+    @JsonProperty("meta")
     public Object meta;
-    @SerializedName("store_id")
-    @Expose
+    @JsonProperty("store_id")
     public String storeId;
-    @SerializedName("locale")
-    @Expose
+    @JsonProperty("locale")
     public Object locale;
-    @SerializedName("identity_card")
-    @Expose
+    @JsonProperty("identity_card")
     public String identityCard;
-    @SerializedName("accounting_card_id")
-    @Expose
+    @JsonProperty("accounting_card_id")
     public Object accountingCardId;
-    @SerializedName("business")
-    @Expose
+    @JsonProperty("business")
     public Integer business;
-    @SerializedName("birth_date")
-    @Expose
+    @JsonProperty("birth_date")
     public Object birthDate;
-    @SerializedName("phone")
-    @Expose
+    @JsonProperty("phone")
     public Object phone;
-    @SerializedName("additional_phone")
-    @Expose
+    @JsonProperty("additional_phone")
     public Object additionalPhone;
-    @SerializedName("sex_id")
-    @Expose
+    @JsonProperty("sex_id")
     public Object sexId;
-    @SerializedName("edit_order")
-    @Expose
+    @JsonProperty("edit_order")
     public Object editOrder;
-    @SerializedName("send_email")
-    @Expose
+    @JsonProperty("send_email")
     public Integer sendEmail;
-    @SerializedName("send_sms")
-    @Expose
+    @JsonProperty("send_sms")
     public Integer sendSms;
-    @SerializedName("subscribe_at")
-    @Expose
+    @JsonProperty("subscribe_at")
     public String subscribeAt;
-    @SerializedName("subscribe_ip")
-    @Expose
+    @JsonProperty("subscribe_ip")
     public String subscribeIp;
-    @SerializedName("club_accept_at")
-    @Expose
+    @JsonProperty("club_accept_at")
     public String clubAcceptAt;
-    @SerializedName("club_accept_ip")
-    @Expose
+    @JsonProperty("club_accept_ip")
     public String clubAcceptIp;
-    @SerializedName("club_accept")
-    @Expose
+    @JsonProperty("club_accept")
     public Integer clubAccept;
-    @SerializedName("send_club_database")
-    @Expose
+    @JsonProperty("send_club_database")
     public Integer sendClubDatabase;
-    @SerializedName("disabled_at")
-    @Expose
+    @JsonProperty("disabled_at")
     public Object disabledAt;
-    @SerializedName("activated_at")
-    @Expose
+    @JsonProperty("activated_at")
     public Object activatedAt;
-    @SerializedName("deleted_at")
-    @Expose
+    @JsonProperty("deleted_at")
     public Object deletedAt;
-    @SerializedName("area_id")
-    @Expose
+    @JsonProperty("area_id")
     public Integer areaId;
-    @SerializedName("deactivated_at")
-    @Expose
+    @JsonProperty("deactivated_at")
     public Object deactivatedAt;
-    @SerializedName("customer_id_club")
-    @Expose
+    @JsonProperty("customer_id_club")
     public Object customerIdClub;
-    @SerializedName("name")
-    @Expose
+    @JsonProperty("name")
     public String name;
-    @SerializedName("orders")
-    @Expose
+    @JsonProperty("orders")
     public List<Object> orders;
-    @SerializedName("cards")
-    @Expose
+    @JsonProperty("cards")
     public List<Object> cards;
-    @SerializedName("addresses")
-    @Expose
-    public List<Object> addresses;
-    @SerializedName("popularProducts")
-    @Expose
+    @JsonProperty("addresses")
+    public Addresses addresses;
+    @JsonProperty("popularProducts")
     public String popularProducts;
-    @SerializedName("features")
-    @Expose
+    @JsonProperty("features")
     public List<Object> features;
-    @SerializedName("coupons")
-    @Expose
+    @JsonProperty("coupons")
     public List<Object> coupons;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
 
 }

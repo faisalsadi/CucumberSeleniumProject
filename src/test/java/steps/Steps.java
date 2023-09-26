@@ -57,7 +57,11 @@ public class Steps {
 //        System.out.println("printing "+ text);
 //    }
 
+    protected TestContext context;
 
+    public Steps(TestContext context) {
+        this.context = context;
+    }
 
 //    Scenario: login
 //    When On the upper bar - I click ‘login’

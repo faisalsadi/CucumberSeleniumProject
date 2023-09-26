@@ -8,9 +8,11 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.HttpStatus;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Map;
 
 public class HttpFacade {
@@ -28,47 +30,73 @@ public class HttpFacade {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet request = new HttpGet(url);
         String response = httpClient.execute(request, new BasicHttpClientResponseHandler());
-        Gson gson = new Gson();
-        T object = gson.fromJson(response, clz);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        T object = objectMapper.readValue(response, clz);
         return object;
     }
+
     public static <T> T post(String url, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
-        
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(requestBodyMap);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(requestBodyMap);
+
         StringEntity entity = new StringEntity(requestBody);
         request.setEntity(entity);
+
         request.setHeader("accept", "application/json");
         request.setHeader("Content-Type", "application/json");
-//        request.setHeader("Host","<calculated when request is sent>");
+
         CloseableHttpResponse execute = httpClient.execute(request);
         int code = execute.getCode();
         String responseString = "";
-        if(execute.getCode() == HttpStatus.SC_OK){
+        if (execute.getCode() == HttpStatus.SC_OK) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             execute.getEntity().writeTo(out);
             responseString = out.toString();
             out.close();
             //..more logic
+        } else {
+            throw new RuntimeException("not valid login details");
         }
-        else
-        {
-            throw  new RuntimeException("not valid login details");
+        T obj = objectMapper.readValue(responseString, clz);
+        return obj;
+    }
+    public static JSONObject post(String url, String requestBodyMap) throws IOException {
+        URL urlObj = new URL(url);
+        HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream())) {
+            outputStream.writeBytes(requestBodyMap);
+            outputStream.flush();
         }
-//        String response = httpClient.execute(request, new BasicHttpClientResponseHandler());
-        ObjectMapper responseMapper = new ObjectMapper();
-
-        return gson.fromJson(responseString, clz);
+        connection.getResponseCode();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            return new JSONObject(response.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            connection.disconnect();
+        }
+        return null;
     }
 
     public static <T> T put(String url, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPut request = new HttpPut(url);
 
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(requestBodyMap);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(requestBodyMap);
 
         StringEntity entity = new StringEntity(requestBody);
         request.setEntity(entity);
@@ -78,16 +106,15 @@ public class HttpFacade {
 
         String response = httpClient.execute(request, new BasicHttpClientResponseHandler());
 
-
-        T object = gson.fromJson(response, clz);
-        return object;
+        return objectMapper.readValue(response, clz);
     }
+
     public static <T> T patch(String url, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPatch request = new HttpPatch(url);
 
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(requestBodyMap);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(requestBodyMap);
 
         StringEntity entity = new StringEntity(requestBody);
         request.setEntity(entity);
@@ -97,15 +124,15 @@ public class HttpFacade {
 
         String response = httpClient.execute(request, new BasicHttpClientResponseHandler());
 
-        T object = gson.fromJson(response, clz);
-        return object;
+        return objectMapper.readValue(response, clz);
     }
+
     public static <T> T delete(String url, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpDelete request = new HttpDelete(url);
 
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(requestBodyMap);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = objectMapper.writeValueAsString(requestBodyMap);
 
         StringEntity entity = new StringEntity(requestBody);
         request.setEntity(entity);
@@ -114,8 +141,7 @@ public class HttpFacade {
 
         String response = httpClient.execute(request, new BasicHttpClientResponseHandler());
 
-        T object = gson.fromJson(response, clz);
-        return object;
+        return objectMapper.readValue(response, clz);
     }
 
 }

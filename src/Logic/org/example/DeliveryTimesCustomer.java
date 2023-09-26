@@ -1,60 +1,78 @@
 package org.example;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "id",
+        "customer_id",
+        "order_id",
+        "strip_id",
+        "address",
+        "hour",
+        "supply_date",
+        "supply_date_no_time",
+        "order_until_hour",
+        "expires_at",
+        "name",
+        "price",
+        "area_id",
+        "store_id",
+        "deleted_at",
+        "created_at",
+        "updated_at"
+})
 
 public class DeliveryTimesCustomer {
 
-    @SerializedName("id")
-    @Expose
+    @JsonProperty("id")
     public Integer id;
-    @SerializedName("customer_id")
-    @Expose
+    @JsonProperty("customer_id")
     public Integer customerId;
-    @SerializedName("order_id")
-    @Expose
+    @JsonProperty("order_id")
     public Object orderId;
-    @SerializedName("strip_id")
-    @Expose
+    @JsonProperty("strip_id")
     public Integer stripId;
-    @SerializedName("address")
-    @Expose
+    @JsonProperty("address")
     public Address address;
-    @SerializedName("hour")
-    @Expose
+    @JsonProperty("hour")
     public String hour;
-    @SerializedName("supply_date")
-    @Expose
+    @JsonProperty("supply_date")
     public String supplyDate;
-    @SerializedName("supply_date_no_time")
-    @Expose
+    @JsonProperty("supply_date_no_time")
     public String supplyDateNoTime;
-    @SerializedName("order_until_hour")
-    @Expose
+    @JsonProperty("order_until_hour")
     public String orderUntilHour;
-    @SerializedName("expires_at")
-    @Expose
+    @JsonProperty("expires_at")
     public Object expiresAt;
-    @SerializedName("name")
-    @Expose
+    @JsonProperty("name")
     public String name;
-    @SerializedName("price")
-    @Expose
+    @JsonProperty("price")
     public Double price;
-    @SerializedName("area_id")
-    @Expose
+    @JsonProperty("area_id")
     public String areaId;
-    @SerializedName("store_id")
-    @Expose
+    @JsonProperty("store_id")
     public String storeId;
-    @SerializedName("deleted_at")
-    @Expose
+    @JsonProperty("deleted_at")
     public Object deletedAt;
-    @SerializedName("created_at")
-    @Expose
+    @JsonProperty("created_at")
     public String createdAt;
-    @SerializedName("updated_at")
-    @Expose
+    @JsonProperty("updated_at")
     public String updatedAt;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
 
 }

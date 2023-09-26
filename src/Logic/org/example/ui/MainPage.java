@@ -6,6 +6,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -19,11 +21,13 @@ public class MainPage extends Page {
     private static String emptyCartButtonIdLocator="remove-cart";
     private static String searchItemIdLocator = "destination";
     private static String userName="faisal";
+    private static String deleteCartId="delete-cart-btn";
     private WebElement loginButton;
 
     private  WebElement profileButton;
     private WebElement logout;
     private WebElement emptyCart;
+    private WebElement deleteCart;
     private WebElement search;
     public MainPage(WebDriver driver) {
         super(driver);
@@ -36,6 +40,8 @@ public class MainPage extends Page {
     }
 
     public void searchItem(String s) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver,5);
+        search=wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(searchItemIdLocator)));
         search.sendKeys(s);
         search.sendKeys(Keys.ENTER);
     }
@@ -79,15 +85,26 @@ public class MainPage extends Page {
 
     public void logOut()
     {
-        profileButton=driver.findElement(By.xpath(profileButtonLocatorXpath));
+        WebDriverWait wait= new WebDriverWait(driver,5);
+        profileButton=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(profileButtonLocatorXpath)));
         profileButton.click();
         logout = driver.findElement(By.xpath(logutButtonXpathLocator));
         logout.click();
     }
     public void emptyCart()
     {
-        emptyCart=driver.findElement(By.id(emptyCartButtonIdLocator));
-        emptyCart.click();
+        try {
+            emptyCart=driver.findElement(By.id(emptyCartButtonIdLocator));
+            emptyCart.click();
+            WebDriverWait wait = new WebDriverWait(driver, 20);
+            deleteCart=wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(deleteCartId)));
+            deleteCart.click();
+        }
+        catch (Exception e)
+        {
+            System.out.println("the cart is empty" + e.getMessage());
+        }
+
     }
     public String getNameTag()
     {

@@ -6,11 +6,10 @@ import org.example.BrowserWrapper;
 import org.example.ui.Login;
 import org.example.ui.MainPage;
 
-public class LogOutSteps {
-    private TestContext context;
+public class LogOutSteps extends Steps{
 
     public LogOutSteps(TestContext context) {
-        this.context = context;
+        super(context);
     }
     @When("On Main Page sign out from account")
     public void logOut()

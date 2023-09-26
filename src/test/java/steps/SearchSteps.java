@@ -1,40 +1,31 @@
 package steps;
 
 import context.TestContext;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.BrowserWrapper;
 import org.example.ui.MainPage;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CartSteps extends Steps {
-    public CartSteps(TestContext context) {
+public class SearchSteps extends Steps {
+    public SearchSteps(TestContext context) {
         super(context);
     }
-//    @And("I am logged in into my account")
-//    public void iAmLoggedInIntoMyAccount() {
-//
-//    }
 
-    @When("I click on add item {string}")
-    public void iClickOnAddItem(String name) throws InterruptedException {
+    @When("On Search field - I search for {string}")
+    public void onSearchFieldISearchFor(String name) throws InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
         MainPage homePage = browserWrapper.getCurrentPage();
-        Thread.sleep(2000);
-        homePage.addItemToCart(name);
+        homePage.searchItem(name);
     }
 
-    @Then("Item {string} is in the cart")
-    public void itemIsInTheCart(String name) {
+    @Then("I am in {string} search page")
+    public void iAmInSearchPage(String name) {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
-        MainPage homePage = browserWrapper.getCurrentPage();
-        boolean found = homePage.isItemInCart(name);
+        boolean found = browserWrapper.getPageSource().contains(name);
         int retries=0;
         while(!found && retries < 10){
-            found = homePage.isItemInCart(name);
+            found = browserWrapper.getPageSource().contains(name);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -42,6 +33,6 @@ public class CartSteps extends Steps {
             }
             retries++;
         }
-        assertTrue(found);
+        assertTrue(browserWrapper.getPageSource().contains(name));
     }
 }
