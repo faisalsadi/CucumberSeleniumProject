@@ -70,11 +70,11 @@ public class CartSteps extends Steps {
     }
 
     @When("I click on remove item {string}")
-    public void iClickOnRemoveItem(String name) throws InterruptedException {
+    public void iClickOnRemoveItem(String itemXpathName) throws InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
         MainPage homePage = browserWrapper.getCurrentPage();
         Thread.sleep(2000);
-        homePage.removeItemFromCart();
+        homePage.removeItemFromCart(itemXpathName);
     }
 }
 

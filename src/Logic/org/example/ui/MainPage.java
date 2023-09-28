@@ -75,11 +75,11 @@ public class MainPage extends Page {
         Thread.sleep(5000);
 
     }
-    public void removeItemFromCart() throws InterruptedException {
+    public void removeItemFromCart(String itemXpathName) throws InterruptedException {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.className("plus-minus"))).perform();
         WebDriverWait wait=new WebDriverWait(driver,5);
-        WebElement bt = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@aria-label=\"הפחת 1 יחידות משוקו טרה בבקבוק מסל הקניות\"]")));
+        WebElement bt = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@aria-label="+"\""+ itemXpathName +"\"]")));
         bt.click();
     }
 

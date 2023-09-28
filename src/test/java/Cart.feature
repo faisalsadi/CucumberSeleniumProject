@@ -11,5 +11,5 @@ Feature: Cart
     Given I have navigated to Rami Levi
     And I login with user 'fesalsadi@gmail.com' and password '123456789' using Api
     And I click on add item before remove 'שוקו טרה בבקבוק'
-    When I click on remove item 'שוקו טרה בבקבוק'
+    When I click on remove item 'הפחת 1 יחידות משוקו טרה בבקבוק מסל הקניות'
     Then Item "שוקו מועשר בבקבוק 1 ליטר כמות 1 יחידות סך הכל לתשלום 10.90 שקלים" is not in the cart
