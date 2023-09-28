@@ -34,7 +34,7 @@ Feature: Login Feature
 
   Scenario: Api Login
     Given I have navigated to Rami Levi
-    When I login with user 'fesalsadi@gmail.com' and password '123456789' using Api
+    And I login with user 'fesalsadi@gmail.com' and password '123456789' using Api
     Then On Rami Levi home page - 'faisal'
 
 

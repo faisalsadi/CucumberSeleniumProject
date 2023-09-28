@@ -2,6 +2,7 @@ package steps;
 
 import com.google.gson.JsonObject;
 import context.TestContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -84,7 +85,7 @@ public class LoginSteps extends Steps{
         assertEquals("כניסה", currentText);
     }
 
-    @When("I login with user {string} and password {string} using Api")
+    @And("I login with user {string} and password {string} using Api")
     public void iLoginWithUserAndPasswordUsingApi(String user , String password) throws IOException, InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
         String jsonBodyLogin = "{\"username\": \"fesalsadi@gmail.com\",\"password\": \"123456789\",\"restore_account\": false,\"id_delivery_times\": null}";

@@ -78,8 +78,8 @@ public class MainPage extends Page {
     public void removeItemFromCart() throws InterruptedException {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.className("plus-minus"))).perform();
-        Thread.sleep(2000);
-        WebElement bt = driver.findElement(By.xpath("//button[@aria-label=\"הפחת 1 יחידות ממנה חמה שקית נודלס ט.בקר מסל הקניות\"]"));
+        WebDriverWait wait=new WebDriverWait(driver,5);
+        WebElement bt = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@aria-label=\"הפחת 1 יחידות משוקו טרה בבקבוק מסל הקניות\"]")));
         bt.click();
     }
 
