@@ -36,7 +36,7 @@ public class HttpFacade {
         return object;
     }
 
-    public static <T> T post(String url, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
+    public static <T> T post(String url,Map<String, String> headers, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
@@ -45,6 +45,12 @@ public class HttpFacade {
 
         StringEntity entity = new StringEntity(requestBody);
         request.setEntity(entity);
+        // Set headers
+        if (headers != null) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                request.setHeader(entry.getKey(), entry.getValue());
+            }
+        }
 
         request.setHeader("accept", "application/json");
         request.setHeader("Content-Type", "application/json");

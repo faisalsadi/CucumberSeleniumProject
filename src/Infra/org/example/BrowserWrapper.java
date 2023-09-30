@@ -1,15 +1,17 @@
 package org.example;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class BrowserWrapper {
-    private static final String webDriverPath = "C:\\Users\\hariri\\Downloads\\chromedriver.exe";
+    private static final String webDriverPath = "chromedriver.exe";
     private Page currentPage;
     private WebDriver driver;
     public BrowserWrapper() {
@@ -49,8 +51,8 @@ public class BrowserWrapper {
         return driver.getPageSource();
     }
     public void refresh() throws InterruptedException {
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
         driver.navigate().refresh();
+        Thread.sleep(3000);
     }
     public void executeJavascript(String exec)
     {

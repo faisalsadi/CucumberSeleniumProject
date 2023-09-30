@@ -4,8 +4,11 @@ import context.TestContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.example.Api;
 import org.example.BrowserWrapper;
 import org.example.ui.MainPage;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -75,6 +78,23 @@ public class CartSteps extends Steps {
         MainPage homePage = browserWrapper.getCurrentPage();
         Thread.sleep(2000);
         homePage.removeItemFromCart(itemXpathName);
+    }
+
+
+    @When("I add {string} item of {string} using api")
+    public void iAddItemOfUsingApi(String count,String name) throws IOException, InterruptedException {
+        BrowserWrapper browserWrapper = context.get("BrowserWrapper");
+        Api.addItem(name, Double.parseDouble(count));
+        browserWrapper.refresh();
+
+    }
+
+
+    @When("I  empty cart using Api")
+    public void iEmptyCartUsingApi() throws IOException, InterruptedException {
+        BrowserWrapper browserWrapper = context.get("BrowserWrapper");
+        Api.emptycart();
+        browserWrapper.refresh();
     }
 }
 

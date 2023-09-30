@@ -4,6 +4,8 @@ import org.example.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /*
 
@@ -34,11 +36,12 @@ public class Login extends Page {
         loginButton= driver.findElement(By.xpath(loginButtonLocator));
     }
 
-    public void loginFlow(String email,String password)
-    {
+    public void loginFlow(String email,String password) throws InterruptedException {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginButton.click();
+        WebDriverWait wait=new WebDriverWait(driver,15);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'faisal')]")));
 
     }
 

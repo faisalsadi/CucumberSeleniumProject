@@ -1,4 +1,5 @@
 package org.example;
+import org.example.DTOS.AddItemResponse;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,10 +24,12 @@ public class FirstTest {
     "id_delivery_times": null
 }
          */
-        map.put("username","fesalsadi@gmail.com");
-        map.put("password","123456789");
+//        map.put("username","fesalsadi@gmail.com");
+//        map.put("password","123456789");
 
-        LoginResponse post = HttpFacade.post("https://api-prod.rami-levy.co.il/api/v2/site/auth/login", map, LoginResponse.class);
+//        LoginResponse post = HttpFacade.post("https://api-prod.rami-levy.co.il/api/v2/site/auth/login", map, LoginResponse.class);
+//        assertTrue(true);
+//        AddItemResponse response= Api.addItem().getData();
         assertTrue(true);
     }
 

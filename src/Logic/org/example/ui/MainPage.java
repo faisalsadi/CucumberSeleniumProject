@@ -49,6 +49,8 @@ public class MainPage extends Page {
     public void clickLogin()
     {
         loginButton.click();
+        WebDriverWait wait=new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
     }
     public void addItemToCart(String name) throws InterruptedException {
 
@@ -65,14 +67,16 @@ public class MainPage extends Page {
 
         //Performing the mouse hover action on the target element.
         action.moveToElement(elem).perform();
-        Thread.sleep(3000);
+        WebDriverWait wait=new WebDriverWait(driver,5);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@aria-label='הוסף 1 יחידות ל"+name+" לסל הקניות']")));
 
         WebElement button = elem.findElement(By.xpath("//button[@aria-label='הוסף 1 יחידות ל"+name+" לסל הקניות']"));
 
         button.click();
 //        driver.navigate().refresh();
 //        init();
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@aria-label='הוסף 1 יחידות ל"+name+" לסל הקניות']")));
+
 
     }
     public void removeItemFromCart(String itemXpathName) throws InterruptedException {
@@ -96,9 +100,10 @@ public class MainPage extends Page {
         try {
             emptyCart=driver.findElement(By.id(emptyCartButtonIdLocator));
             emptyCart.click();
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(driver, 10);
             deleteCart=wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(deleteCartId)));
             deleteCart.click();
+            deleteCart=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),\"השקית שלך ריקה\")]")));
         }
         catch (Exception e)
         {
