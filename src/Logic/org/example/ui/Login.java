@@ -7,16 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/*
 
-
-<button data-v-5f56f444="" data-v-1cf3984f="" tabindex="0" class="focus-item online-full-btn mt-4 px-5 height-50" aria-label="כניסה"><span data-v-5f56f444="">
-                כניסה
-            </span></button>
-
-
-            #__BVID__388___BV_modal_body_ > div > div:nth-child(2) > div > div > div.text-center.p-2.px-md-5.mt-3 > button
- */
 
 public class Login extends Page {
     private  static  String emailLocator = "email";
@@ -38,10 +29,12 @@ public class Login extends Page {
 
     public void loginFlow(String email,String password) throws InterruptedException {
         emailField.sendKeys(email);
+        Thread.sleep(2000);
         passwordField.sendKeys(password);
+        Thread.sleep(2000);
         loginButton.click();
-        WebDriverWait wait=new WebDriverWait(driver,15);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'faisal')]")));
+        Thread.sleep(2000);
+
 
     }
 

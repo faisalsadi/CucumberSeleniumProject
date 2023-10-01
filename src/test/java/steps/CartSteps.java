@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.Api;
 import org.example.BrowserWrapper;
+import org.example.ResponseWrapper;
 import org.example.ui.MainPage;
 
 import java.io.IOException;
@@ -16,10 +17,6 @@ public class CartSteps extends Steps {
     public CartSteps(TestContext context) {
         super(context);
     }
-//    @And("I am logged in into my account")
-//    public void iAmLoggedInIntoMyAccount() {
-//
-//    }
 
     @When("I click on add item {string}")
     public void iClickOnAddItem(String name) throws InterruptedException {
@@ -84,8 +81,8 @@ public class CartSteps extends Steps {
     @When("I add {string} item of {string} using api")
     public void iAddItemOfUsingApi(String count,String name) throws IOException, InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
-        Api.addItem(name, Double.parseDouble(count));
-        browserWrapper.refresh();
+        if (Api.addItem(name, Double.parseDouble(count)).isStatus())
+            browserWrapper.refresh();
 
     }
 
@@ -93,8 +90,8 @@ public class CartSteps extends Steps {
     @When("I  empty cart using Api")
     public void iEmptyCartUsingApi() throws IOException, InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
-        Api.emptycart();
-        browserWrapper.refresh();
+        if(Api.emptycart().isStatus())
+            browserWrapper.refresh();
     }
 }
 

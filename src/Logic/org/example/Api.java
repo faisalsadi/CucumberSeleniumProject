@@ -13,14 +13,6 @@ import java.util.Map;
 
 import static org.example.HttpFacade.post;
 
-/*
-
-EcomToken:
-
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLXByb2QucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6XC9cL2FwaS1wcm9kLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTY5NDcwNzQyOSwibmJmIjoxNjk0NzA3NDg5LCJleHAiOjE2OTQ3OTM4MjksImlkIjo4ODk0MDQsImVtYWlsIjoiZmVzYWxzYWRpQGdtYWlsLmNvbSIsImNpZCI6Ijk5MDAxNTQ3NjI4In0.3BeOGC3omqqV3gkzPzmnDKtRX1E3RpR47cs6pqdWGvQ
- */
-//
-// https://www.rami-levy.co.il/api/v2/cart
 public class Api {
     private static ObjectMapper objectMapper = new ObjectMapper();
     private static IdToName idToName=new IdToName();
@@ -28,7 +20,7 @@ public class Api {
     public static ResponseWrapper<JSONObject> loginUser( ) throws IOException {
         JSONObject post = post("https://api-prod.rami-levy.co.il/api/v2/site/auth/login", "{\"username\": \"fesalsadi@gmail.com\",\"password\": \"123456789\",\"restore_account\": false,\"id_delivery_times\": null}");
         ResponseWrapper<JSONObject> ret = new ResponseWrapper<>();
-        ret.setStatus(200);
+        ret.setStatus(true);
         ret.setData(post);
         return ret;
     }
@@ -41,8 +33,8 @@ public class Api {
         });
         Map<String,String> headers= new HashMap<>();
         headers.put("Ecomtoken","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLXByb2QucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6XC9cL2FwaS1wcm9kLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTY5NTkxMjIxNiwibmJmIjoxNjk1OTEyMjc2LCJleHAiOjE2OTU5OTg2MTYsImlkIjo4ODk0MDQsImVtYWlsIjoiZmVzYWxzYWRpQGdtYWlsLmNvbSIsImNpZCI6Ijk5MDAxNTQ3NjI4In0.Ao8Lqa_-P8AVkybBAyT_TLEHdOI91EhQrsSf9OR4Jfk");
-        AddItemResponse ret = post("https://www.rami-levy.co.il/api/v2/cart", headers, body, AddItemResponse.class);
-        return new ResponseWrapper<>(200,ret);
+        return post("https://www.rami-levy.co.il/api/v2/cart", headers, body, AddItemResponse.class);
+
     }
     public static ResponseWrapper<AddItemResponse> emptycart( ) throws IOException {
 
@@ -52,8 +44,8 @@ public class Api {
         });
         Map<String,String> headers= new HashMap<>();
         headers.put("Ecomtoken","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLXByb2QucmFtaS1sZXZ5LmNvLmlsIiwiYXVkIjoiaHR0cHM6XC9cL2FwaS1wcm9kLnJhbWktbGV2eS5jby5pbCIsImlhdCI6MTY5NTkxMjIxNiwibmJmIjoxNjk1OTEyMjc2LCJleHAiOjE2OTU5OTg2MTYsImlkIjo4ODk0MDQsImVtYWlsIjoiZmVzYWxzYWRpQGdtYWlsLmNvbSIsImNpZCI6Ijk5MDAxNTQ3NjI4In0.Ao8Lqa_-P8AVkybBAyT_TLEHdOI91EhQrsSf9OR4Jfk");
-        AddItemResponse ret = post("https://www.rami-levy.co.il/api/v2/cart", headers, body, AddItemResponse.class);
-        return new ResponseWrapper<>(200,ret);
+        return post("https://www.rami-levy.co.il/api/v2/cart", headers, body, AddItemResponse.class);
+
     }
 
 

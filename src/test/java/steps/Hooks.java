@@ -6,6 +6,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import org.example.Api;
 import org.example.BrowserWrapper;
+import org.example.ResponseWrapper;
 import org.example.ui.MainPage;
 
 import java.io.IOException;
@@ -28,14 +29,6 @@ public class Hooks {
     @After
     public void tearDown() throws IOException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
-//        try {
-//            MainPage page = browserWrapper.getCurrentPage();
-//            page.emptyCart();
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println("nothing happend");
-//        }
         Api.emptycart();
         browserWrapper.close();
 

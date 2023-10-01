@@ -1,6 +1,10 @@
 Feature: Search
-  Scenario: Search item
+  Background:
     Given I have navigated to Rami Levi
-    And I login with user 'fesalsadi@gmail.com' and password '123456789' using Api
+    And On Rami Levi home page - I click login
+    When On login popup - I login with user 'fesalsadi@gmail.com' and password '123456789'
+  Scenario: Search item
+#    Given I have navigated to Rami Levi
+#    And I login with user 'fesalsadi@gmail.com' and password '123456789' using Api
     When On Search field - I search for 'אסם'
     Then I am in 'אסם' search page

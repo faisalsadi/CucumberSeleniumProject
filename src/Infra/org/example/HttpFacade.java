@@ -17,13 +17,8 @@ import java.util.Map;
 
 public class HttpFacade {
 
-    /// https://api-prod.rami-levy.co.il/api/v2/site/auth/login
-
-    // https://api-prod.rami-levy.co.il/api/v2/site/auth/login
-
-    // https://api-prod.rami-levy.co.il/api/v2/site/auth/register
     public HttpFacade() {
-//        this.httpClient = HttpClients.createDefault();
+
     }
 
     public static <T> T get(String url, Class<T> clz) throws IOException {
@@ -36,7 +31,7 @@ public class HttpFacade {
         return object;
     }
 
-    public static <T> T post(String url,Map<String, String> headers, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
+    public static <T> ResponseWrapper<T> post(String url,Map<String, String> headers, Map<String, Object> requestBodyMap, Class<T> clz) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost request = new HttpPost(url);
 
@@ -56,19 +51,16 @@ public class HttpFacade {
         request.setHeader("Content-Type", "application/json");
 
         CloseableHttpResponse execute = httpClient.execute(request);
-        int code = execute.getCode();
         String responseString = "";
         if (execute.getCode() == HttpStatus.SC_OK) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             execute.getEntity().writeTo(out);
             responseString = out.toString();
             out.close();
-            //..more logic
         } else {
-            throw new RuntimeException("not valid login details");
+            new ResponseWrapper<>(false,null);
         }
-        T obj = objectMapper.readValue(responseString, clz);
-        return obj;
+        return new ResponseWrapper<>(true,objectMapper.readValue(responseString, clz));
     }
     public static JSONObject post(String url, String requestBodyMap) throws IOException {
         URL urlObj = new URL(url);

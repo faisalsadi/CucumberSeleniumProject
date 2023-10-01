@@ -54,12 +54,6 @@ public class MainPage extends Page {
     }
     public void addItemToCart(String name) throws InterruptedException {
 
-//        WebElement rowelement = items.get(row);
-//        List<WebElement> cols = rowelement.findElements(By.xpath("./*"));
-
-        // //button[@aria-label='הוסף 1 יחידות לשוקו טרה בבקבוק לסל הקניות']
-
-//
         WebElement elem=driver.findElement(By.xpath("//h3[contains(text(),"+"\""+ name +"\")]"));
 
         //Creating object of an Actions class
@@ -73,11 +67,7 @@ public class MainPage extends Page {
         WebElement button = elem.findElement(By.xpath("//button[@aria-label='הוסף 1 יחידות ל"+name+" לסל הקניות']"));
 
         button.click();
-//        driver.navigate().refresh();
-//        init();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@aria-label='הוסף 1 יחידות ל"+name+" לסל הקניות']")));
-
-
     }
     public void removeItemFromCart(String itemXpathName) throws InterruptedException {
         Actions actions = new Actions(driver);

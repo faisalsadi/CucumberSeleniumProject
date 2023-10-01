@@ -26,7 +26,7 @@ public class LoginSteps extends Steps{
     public void iHaveNavigatedToRamiLevi() {
         BrowserWrapper browserWrapper = new BrowserWrapper();
         context.put("BrowserWrapper", browserWrapper);
-        MainPage ramiLeviHomePage = browserWrapper.createPage(MainPage.class, "http://rami-levy.co.il");
+        browserWrapper.createPage(MainPage.class, "http://rami-levy.co.il");
 
     }
 
@@ -48,7 +48,7 @@ public class LoginSteps extends Steps{
     }
 
     @Then("On Rami Levi home page - '{}'")
-    public void onRamiLeviHomePageTzahi(String name) {
+    public void onRamiLeviHomePage(String name) {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
         MainPage homePage = browserWrapper.getCurrentPage();
         String currentText = homePage.getNameTag();
@@ -84,14 +84,8 @@ public class LoginSteps extends Steps{
     @And("I login with user {string} and password {string} using Api")
     public void iLoginWithUserAndPasswordUsingApi(String user , String password) throws IOException, InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
-        String jsonBodyLogin = "{\"username\": \"fesalsadi@gmail.com\",\"password\": \"123456789\",\"restore_account\": false,\"id_delivery_times\": null}";
-//        JSONObject loginResponse = post("https://api-prod.rami-levy.co.il/api/v2/site/auth/login", jsonBodyLogin);
         ResponseWrapper<JSONObject> loginResponse = Api.loginUser();
         String s ="{\"authuser\":{\"user\":" + loginResponse.getData().get("user").toString() +"}}";
-//        jsExecutor.executeScript(String.format("window.localStorage.setItem('ramilevy','%s')",s));
-//        User user1 = loginResponse.getUser();
-//        String q=user1.toString();
-
         browserWrapper.executeJavascript(String.format("window.localStorage.setItem('ramilevy','%s')",s));
         browserWrapper.refresh();
     }
