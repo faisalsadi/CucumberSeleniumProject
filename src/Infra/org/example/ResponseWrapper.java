@@ -3,10 +3,10 @@ package org.example;
 import lombok.Data;
 @Data
 public class ResponseWrapper<T> {
-    private boolean status;
+    private int status;
     private T data;
 
-    public ResponseWrapper(boolean status, T data) {
+    public ResponseWrapper(int status, T data) {
         this.status = status;
         this.data = data;
     }

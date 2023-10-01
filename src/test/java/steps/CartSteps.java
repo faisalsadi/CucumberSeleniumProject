@@ -4,6 +4,7 @@ import context.TestContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.hc.core5.http.HttpStatus;
 import org.example.Api;
 import org.example.BrowserWrapper;
 import org.example.ResponseWrapper;
@@ -81,8 +82,10 @@ public class CartSteps extends Steps {
     @When("I add {string} item of {string} using api")
     public void iAddItemOfUsingApi(String count,String name) throws IOException, InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
-        if (Api.addItem(name, Double.parseDouble(count)).isStatus())
+        if (Api.addItem(name, Double.parseDouble(count)).getStatus()==HttpStatus.SC_OK)
             browserWrapper.refresh();
+        else
+            throw new RuntimeException("api call failed");
 
     }
 
@@ -90,8 +93,10 @@ public class CartSteps extends Steps {
     @When("I  empty cart using Api")
     public void iEmptyCartUsingApi() throws IOException, InterruptedException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
-        if(Api.emptycart().isStatus())
+        if(Api.emptycart().getStatus()==HttpStatus.SC_OK)
             browserWrapper.refresh();
+        else
+            throw new RuntimeException("api call failed");
     }
 }
 

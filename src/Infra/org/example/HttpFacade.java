@@ -58,9 +58,9 @@ public class HttpFacade {
             responseString = out.toString();
             out.close();
         } else {
-            new ResponseWrapper<>(false,null);
+            new ResponseWrapper<>(execute.getCode(),null);
         }
-        return new ResponseWrapper<>(true,objectMapper.readValue(responseString, clz));
+        return new ResponseWrapper<>(execute.getCode(),objectMapper.readValue(responseString, clz));
     }
     public static JSONObject post(String url, String requestBodyMap) throws IOException {
         URL urlObj = new URL(url);

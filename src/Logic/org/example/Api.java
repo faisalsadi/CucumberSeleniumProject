@@ -20,7 +20,7 @@ public class Api {
     public static ResponseWrapper<JSONObject> loginUser( ) throws IOException {
         JSONObject post = post("https://api-prod.rami-levy.co.il/api/v2/site/auth/login", "{\"username\": \"fesalsadi@gmail.com\",\"password\": \"123456789\",\"restore_account\": false,\"id_delivery_times\": null}");
         ResponseWrapper<JSONObject> ret = new ResponseWrapper<>();
-        ret.setStatus(true);
+        ret.setStatus(200);
         ret.setData(post);
         return ret;
     }

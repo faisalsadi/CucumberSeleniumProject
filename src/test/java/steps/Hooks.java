@@ -17,15 +17,7 @@ public class Hooks {
     public Hooks(TestContext context) {
         this.context = context;
     }
-    @BeforeAll
-    public static void beforeAll(){
-        System.out.println("Before All 123");
-    }
 
-    @Before
-    public void before(){
-        System.out.println("Before");
-    }
     @After
     public void tearDown() throws IOException {
         BrowserWrapper browserWrapper = context.get("BrowserWrapper");
